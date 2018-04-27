@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+/*Import Bootstrap*/
+ @import "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css";
+ @import "styles.css";
