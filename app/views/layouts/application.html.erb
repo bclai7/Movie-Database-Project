@@ -12,7 +12,8 @@
   <!-- Navigation bar -->
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">Movie Database</a>
+      <!-- <a class="navbar-brand" href="/">Movie Database</a> -->
+      <%= link_to "Movie Database", root_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,6 +30,15 @@
       </div>
     </nav>
 
+    <!-- Flash Messages -->
+    <div class="pageContainer">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    </div>
+    
     <%= yield %>
+
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
