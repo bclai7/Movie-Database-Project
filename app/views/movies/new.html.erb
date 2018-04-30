@@ -2,7 +2,7 @@
 <div class="pageContainer">
   <h1>Add New Movie</h1>
   <div class="UserForm">
-    <%= form_for(@movie, url: '/movies/new') do |f| %>
+    <%= form_for @movie, url: '/movies/new', html: { multipart: true } do |f| %>
       <%= form_errors_for @movie %>
 
       <%= f.label :title %>
@@ -14,8 +14,8 @@
       <%= f.label :release_date, "Release Date (Optional)" %>
       <%= f.date_field :release_date, class: "form-control" %>
 
-      <%= f.label :poster_path, "Movie Poster (Optional)" %>
-      <%= f.file_field :poster_path, class: "form-control" %>
+      <%= f.label :poster, "Movie Poster (Optional)" %>
+      <%= f.file_field :poster, class: "form-control" %>
 
       <%= f.submit "Add Movie", class: "btn btn-primary registerButton" %>
     <% end %>

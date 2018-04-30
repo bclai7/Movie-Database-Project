@@ -30,6 +30,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootstrap', '~> 4.1.0'
 
+gem "paperclip", "~> 6.0.0" # For image uploading
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

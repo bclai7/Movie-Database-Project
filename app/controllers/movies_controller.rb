@@ -23,7 +23,7 @@ class MoviesController < ApplicationController
   private
     def movie_params
       # Only permit necessary fields when user enters information
-      params.require(:movie).permit(:title, :plot, :release_date, :poster_path)
+      params.require(:movie).permit(:title, :plot, :release_date, :poster)
     end
 
     def valid_user
