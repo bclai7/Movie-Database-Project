@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180430182518) do
+ActiveRecord::Schema.define(version: 20180430202007) do
 
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.text "plot"
     t.string "poster_path"
     t.date "release_date"
-    t.float "avg_rating"
+    t.float "avg_rating", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
