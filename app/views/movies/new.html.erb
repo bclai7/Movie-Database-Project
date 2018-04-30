@@ -1,0 +1,23 @@
+<% provide(:title, 'Add New Movie') %>
+<div class="pageContainer">
+  <h1>Add New Movie</h1>
+  <div class="UserForm">
+    <%= form_for(@movie, url: '/movies/new') do |f| %>
+      <%= form_errors_for @movie %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+
+      <%= f.label :plot %>
+      <%= f.text_area :plot, class: "form-control" %>
+
+      <%= f.label :release_date %>
+      <%= f.date_field :release_date, class: "form-control" %>
+
+      <%= f.label :poster_path, "Confirmation" %>
+      <%= f.file_field :poster_path, class: "form-control" %>
+
+      <%= f.submit "Add Movie", class: "btn btn-primary registerButton" %>
+    <% end %>
+  </div>
+</div>

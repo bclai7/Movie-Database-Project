@@ -3,7 +3,7 @@
   <h1>Register</h1>
   <div class="UserForm">
     <%= form_for(@user, url: register_path) do |f| %>
-      <%= render 'shared/error_messages' %>
+      <%= form_errors_for @user %>
 
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
