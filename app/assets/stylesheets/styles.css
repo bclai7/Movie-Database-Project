@@ -31,7 +31,7 @@
   margin: 0 25px 25px 25px;
 }
 
-.registerButton{
+.registerButton, .loginButton{
   margin-top: 15px;
 }
 

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params) # Creates user object from form fields
     if @user.save # Tries to save to database
+      log_in @user # automatically log user in after registering
       # If successful, print success message and redirect to profile page
       flash[:success] = "Thank you for registering!"
       redirect_to @user
