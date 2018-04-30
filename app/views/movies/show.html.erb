@@ -3,4 +3,9 @@
   <h4>Released: <p><%= @movie.release_date%></p></h4>
   <p><%= @movie.plot %></p>
   <h6>Rating: <%= @movie.avg_rating %></h6>
+  <% if @movie.poster_path%>
+    <img class="posterImage" src="<%= @movie.poster_path %>">
+  <% else %>
+    <img class="posterImage" src="<%= image_path('default_poster.png') %>">
+  <% end %>
 </div>
