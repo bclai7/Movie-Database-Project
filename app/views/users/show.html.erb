@@ -1,1 +1,5 @@
 <%= @user.name %>, <%= @user.email %>
+
+<% if is_admin? %>
+  <h2>Admin Panel</h2>
+<% end %>

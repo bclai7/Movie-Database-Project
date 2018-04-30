@@ -12,10 +12,14 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
-  
+
   # Checks if user is currently logged in to session
   def logged_in?
     !current_user.nil?
+  end
+
+  def is_admin?
+    current_user.admin
   end
 
   # log current user out by deleting session cookie
