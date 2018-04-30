@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :show, :index]
   before_action :correct_user,   only: [:edit, :update, :show]
+  before_action :non_user, only: [:new, :create] # only non logged in users can access registration page
   def new
     # create new User object for registration page
     @user=User.new
@@ -48,6 +49,13 @@ class UsersController < ApplicationController
       unless current_user?(@user)
         flash[:danger] = "Cannot view that page"
         redirect_to(root_url)
+      end
+    end
+
+    def non_user
+      unless !logged_in?
+        flash[:danger] = 'You are already registered'
+        redirect_to current_user
       end
     end
 

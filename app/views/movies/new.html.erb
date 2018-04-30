@@ -11,10 +11,10 @@
       <%= f.label :plot %>
       <%= f.text_area :plot, class: "form-control" %>
 
-      <%= f.label :release_date %>
+      <%= f.label :release_date, "Release Date (Optional)" %>
       <%= f.date_field :release_date, class: "form-control" %>
 
-      <%= f.label :poster_path, "Confirmation" %>
+      <%= f.label :poster_path, "Movie Poster (Optional)" %>
       <%= f.file_field :poster_path, class: "form-control" %>
 
       <%= f.submit "Add Movie", class: "btn btn-primary registerButton" %>

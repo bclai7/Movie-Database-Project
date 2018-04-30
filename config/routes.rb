@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   resources :users
   resources :movies
 
+  post '/movies/new',  to: 'movies#create' # POST route, creates movie and adds to DB
+
 end

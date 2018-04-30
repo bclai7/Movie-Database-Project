@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :non_user, only: [:new, :create] # only non logged in users can access login page
+
   def new
   end
 
@@ -23,4 +25,12 @@ class SessionsController < ApplicationController
     flash[:success] = 'Logged Out Successfully'
     redirect_to root_url
   end
+
+  private
+    def non_user
+      unless !logged_in?
+        flash[:danger] = 'You are already logged in'
+        redirect_to current_user
+      end
+    end
 end
