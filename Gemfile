@@ -32,6 +32,8 @@ gem 'bootstrap', '~> 4.1.0'
 
 gem "paperclip", "~> 6.0.0" # For image uploading
 
+gem 'will_paginate', '~> 3.1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
