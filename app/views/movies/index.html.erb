@@ -1,9 +1,23 @@
-<% if !@movie_list %>
-  <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
-<% end %>
-
-<% @movie_list.each do |m| %>
-  <h3><%= m.title %></h3>
-  <p><%= m.plot%></p>
-  Rating: <%= m.avg_rating %>
-<% end %>
+<div class="pageContainer">
+  <% if @movie_list.blank? %>
+    <h5>There are no movies containing the term "<%= params[:search] %>".</h5>
+    <%= link_to "Go Back", root_path, class: "pageLink" %>
+  <% else %>
+    <h5>Found results for "<%= params[:search] %>".</h5>
+    <% @movie_list.each do |m| %>
+      <div class="movieResult">
+        <%= image_tag m.poster.url(:thumb), class: "resultPoster" %>
+        <div class="resultDetails">
+          <%= link_to m.title, m, class: "resultLink"%>
+          <div class="resultRating">
+            Rating: <p class="ratingText"><%= m.avg_rating %></p>
+          </div>
+          <div class="resultMoviePlot">
+            <p><%= m.plot%></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= link_to "Go Back", root_path, class: "pageLink" %>
+  <% end %>
+</div>

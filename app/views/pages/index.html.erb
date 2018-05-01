@@ -1,6 +1,12 @@
 <div class="homeBlock overlay">
-  <%= form_tag(movies_path, method: :get, id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Movies", class: "form-control" %>
-    <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+  <%= form_tag(movies_path, method: :get, id: "search-form", class: "homeSearch") do %>
+    <div class="introText">
+      <center>
+        <h3>Search for Movies to rate</h3>
+        <p>Choose from thousands of movies!</p>
+      </center>
+    </div>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Movies", class: "form-control searchBar" %>
+    <center><%= submit_tag "Search", name: nil, class: "btn btn-primary searchButton" %></center>
   <% end %>
 </div>

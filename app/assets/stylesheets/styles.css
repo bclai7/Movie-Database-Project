@@ -1,18 +1,13 @@
-/* Debug message format */
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
+/* OVERALL */
+.pageContainer{
+  margin: 0 25px 25px 25px;
 }
 
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
+html, body{
+  background: #f2f2f2;
 }
 
+/* HOME PAGE */
 .homeBlock{
   width: 100%;
   height: 500px;
@@ -21,18 +16,64 @@
       rgba(25, 20, 20, 0.80),
       rgba(25, 20, 20, 0.80)
     ),url('https://i.imgur.com/9AeeDQ8.jpg');
+
+    padding-top: 50px;
 }
 
 .homeSearch{
   padding-top: 75px;
+  color: #fff;
 }
 
-.pageContainer{
-  margin: 0 25px 25px 25px;
+.homeSearch .searchBar{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.homeSearch .searchButton{
+  margin-top: 20px;
 }
 
 .registerButton, .loginButton{
   margin-top: 15px;
+}
+
+/* Movie index */
+.movieResult{
+  width: 60%;
+  padding: 10px 20px 15px 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.movieResult .resultLink{
+  font-size: 25px;
+  color: black;
+}
+
+.movieResult .resultLink:hover{
+  color: #999999;
+  text-decoration: none;
+}
+
+.movieResult .resultPoster{
+  float: left;
+  margin-right: 15px;
+}
+
+.resultMoviePlot{
+  width: 90%;
+}
+
+.resultRating{
+  float: right;
+}
+
+.resultRating .ratingText{
+  font-size: 30px;
 }
 
 /* Form errors */
