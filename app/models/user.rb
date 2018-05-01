@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :ratings
+
   # Validation for user. Required field with max length of 50
   validates :name, presence: true, length: {maximum: 50}
 

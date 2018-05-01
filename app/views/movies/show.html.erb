@@ -1,6 +1,9 @@
 <div class="pageContainer">
   <h1><%= @movie.title %></h1>
-  <h4>Released: <p><%= @movie.release_date%></p></h4>
+  <% if @movie.release_date %>
+    <h4>Released:</h4>
+    <p><%= @movie.release_date.strftime("%B %e, %Y")%></p>
+  <% end %>
   <p><%= @movie.plot %></p>
   <h6>Rating: <%= @movie.avg_rating %></h6>
   <%= image_tag @movie.poster.url(:regular) %>
@@ -9,4 +12,38 @@
   <% else %>
     <img class="posterImage" src="<%= image_path('default_poster.png') %>">
   <% end %> -->
+
+  <h2>Ratings</h2>
+  <% if logged_in? %>
+    <div class="UserForm">
+      <h4>My Rating</h4>
+      <%= form_for @my_rating, url: '/movies/'+@movie.id.to_s+'/myrating' do |f| %>
+        <%= form_errors_for @my_rating %>
+
+        <% if !@my_rating.rating_value and !@my_rating.comment %>
+          <p>Rate this movie now!</p>
+        <% end %>
+
+        <%= f.label :rating_value %>
+        <%= f.number_field :rating_value, :value => @my_rating.rating_value, class: "form-control", in: 1..10 %>
+
+        <%= f.label :comment %>
+        <%= f.text_area :comment, :value => @my_rating.comment, class: "form-control" %>
+
+        <%= hidden_field_tag :movie_id, @movie.id %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+
+        <%= f.submit "Save Rating", class: "btn btn-primary registerButton" %>
+      <% end %>
+    </div>
+  <% else %>
+    <p><%= link_to "Log In", login_path, class: "pageLink"%> or <%= link_to "Register", register_path, class: "pageLink"%> to rate this movie</p>
+  <% end %>
+
+  <br />
+  <% @ratings.each do |r| %>
+    <h5><%= User.find_by(id: r.user_id).name %></h5>
+    <h6><%= r.rating_value %></h6>
+    <p><%= r.comment %></p>
+  <% end %>
 </div>

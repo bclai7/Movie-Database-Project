@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :movies
-
+  get '/movies/:id', to: "movies#show"
   post '/movies/new',  to: 'movies#create' # POST route, creates movie and adds to DB
+
+  post '/movies/:id/myrating', to: 'movies#add_rating'
+  patch '/movies/:id/myrating', to: 'movies#update_rating'
 
 end
