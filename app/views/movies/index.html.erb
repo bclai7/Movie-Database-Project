@@ -6,7 +6,7 @@
     <h5>Found results for "<%= params[:search] %>".</h5>
     <% @movie_list.each do |m| %>
       <div class="movieResult">
-        <%= image_tag m.poster.url(:thumb), class: "resultPoster" %>
+        <!-- <%= image_tag m.poster.url(:thumb), class: "resultPoster" %> -->
         <div class="resultDetails">
           <%= link_to m.title, m, class: "resultLink"%>
           <div class="resultRating">
