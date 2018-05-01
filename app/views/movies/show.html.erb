@@ -17,6 +17,7 @@
     <center><h4>All Ratings</h4></center>
 
     <% if @ratings.any? %>
+      <% @ratings=Rating.where(movie_id: session[:current_movie_id]).paginate(:page => params[:page], :per_page => 7) %>
       <% @ratings.each do |r| %>
       <div class="feedbackBox">
         <div class="ratingValue">
@@ -28,6 +29,7 @@
         </div>
       </div>
       <% end %>
+      <center><%= will_paginate @ratings, class: "paginate" %></center>
     <% else %>
     <center><p>This movie does not have any ratings yet. Be the first to rate it!</p></center>
     <% end %>
