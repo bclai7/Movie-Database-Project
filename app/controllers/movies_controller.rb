@@ -1,6 +1,16 @@
 class MoviesController < ApplicationController
   before_action :valid_user, only: [:edit, :new, :update, :destroy]
 
+  def index
+    @movie_list=Movie.all
+
+    if params[:search]
+      @movie_list = Movie.where('title LIKE ?', "%#{params[:search]}%")
+    else
+      @movie_list = Movie.all
+    end
+  end
+
   def new
     @movie=Movie.new
   end
@@ -21,6 +31,7 @@ class MoviesController < ApplicationController
     # Get movie's average rating to show on page
     if @ratings.average(:rating_value)
       @movie.avg_rating=@ratings.average(:rating_value).round(1)
+      @movie.save
     end
 
     # If user hasn't rated movie yet, create new rating object for user to rate

@@ -1,0 +1,9 @@
+<% if !@movie_list %>
+  <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
+<% end %>
+
+<% @movie_list.each do |m| %>
+  <h3><%= m.title %></h3>
+  <p><%= m.plot%></p>
+  Rating: <%= m.avg_rating %>
+<% end %>
