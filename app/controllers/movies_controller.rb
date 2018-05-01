@@ -19,7 +19,9 @@ class MoviesController < ApplicationController
     end
 
     # Get movie's average rating to show on page
-    @movie.avg_rating=@ratings.average(:rating_value).round(1)
+    if @ratings.average(:rating_value)
+      @movie.avg_rating=@ratings.average(:rating_value).round(1)
+    end
 
     # If user hasn't rated movie yet, create new rating object for user to rate
     if @my_rating == nil
