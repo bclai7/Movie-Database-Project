@@ -38,8 +38,8 @@
             "Could be better", "Decent Movie", "Not bad", "Good Movie", "Great Movie!",
             "Excellent Movie!!!"]
 
-(0..42000).each do |i|
-  (0..50).each do |j|
+(1..42000).each do |i|
+  (1..50).each do |j|
   	r=Rating.new
     @rate=Random.new.rand(0..9)
     r.rating_value=@rating_values[@rate]
