@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
     @movie_list=Movie.all
 
     if params[:search]
-      @movie_list = Movie.where('title ILIKE ?', "%#{params[:search]}%")
+      @movie_list = Movie.where('lower(title) ILIKE ?', "%#{params[:search]}%".downcase)
     else
       @movie_list = Movie.all
     end
