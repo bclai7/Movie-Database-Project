@@ -33,10 +33,10 @@
 #   u.save
 # end
 #
-# @rating_values = [1,2,3,4,5,6,7,8,9,10]
-# @comments = ["Terrible Movie...", "Bad Movie", "Not very good", "Not a good movie",
-#             "Could be better", "Decent Movie", "Not bad", "Good Movie", "Great Movie!",
-#             "Excellent Movie!!!"]
+@rating_values = [1,2,3,4,5,6,7,8,9,10]
+@comments = ["Terrible Movie...", "Bad Movie", "Not very good", "Not a good movie",
+            "Could be better", "Decent Movie", "Not bad", "Good Movie", "Great Movie!",
+            "Excellent Movie!!!"]
 
 (0..42000).each do |i|
   (0..50).each do |j|
