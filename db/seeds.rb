@@ -5,349 +5,50 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-@plot1="ist ein einfacher Demo-Text für die Print- und Schriftindustrie. Lorem Ipsum ist in der Industrie bereits der Standard Demo-Text seit 1500"
-@plot2="als ein unbekannter Schriftsteller eine Hand voll Wörter nahm und diese durcheinander warf um ein Musterbuch zu erstellen. Es hat "
-@plot3="icht nur 5 Jahrhunderte überlebt, sondern auch in Spruch in die elektronische Schriftbearbeitung geschafft (bemerke, nahezu un"
-@plot4="Lorem Ipsum enhielt, so wie Desktop Software wie Aldus PageMaker - ebenfalls mit Lorem Ipsum."
-@plot5="Bekannt wurde es 1960, mit dem erscheinen von Letraset, welches Passagen von"
 
-@movie_names=['Star Wars', 'Lord of the Rings', 'The Patriot', 'Rampage', 'Hacksaw Ridge', 'Batman v Superman: Dawn of Justice', 'The Maze Runner',
-'Kill Bill: Vol. 1', 'Guardians of the Galaxy', '2001: A Space Odyssey', 'Unstoppable', 'Inside Out', 'Batman Begins', 'San Andreas', 'Transformers: Age of Extinction',
-'It Follows', 'Rise of the Planet of the Apes', 'The Godfather', 'Avengers: Infinity War',
-'Iron Man 3', 'Iron Man', 'Iron Man 2', 'Pirates of the Caribbean: Dead Mans Chest',
-'Fifty Shades of Grey', 'Monsters, Inc.', 'X-Men: Days of Future Past', 'Name',
-'Captain America: Civil War', 'The Twilight Saga: Eclipse','Harry Potter and the Deathly Hallows: Part 2',
-'Jumanji: Welcome to the Jungle', 'Man of Steel', 'The Incredibles', 'Black Panther', 'Teenage Mutant Ninja Turtles', 'Taken 3',
-'Spider-Man: Homecoming', 'The Terminator', 'Terminator 3: Rise of the Machines']
+require 'csv'
 
-movies=Movie.create([])
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'movies.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  m = Movie.new
+  if row['original_title']
+    m.title = row['original_title']
+  end
+  if row['overview']
+    m.plot = row['overview']
+  end
+  if row['release_date']
+    m.release_date = row['release_date']
+  end
+  if row['poster_path']
+    m.poster_file_name = "http://image.tmdb.org/t/p/w185" + row['poster_path']
+  end
+  m.save
+end
+puts csv_text
 
-movies = Movie.create([{ title: @movie_names[0], plot: @plot1},
-  { title:  @movie_names[1], plot: @plot2 },
-  { title:  @movie_names[2], plot: @plot3 },
-  { title:  @movie_names[3], plot: @plot4 },
-  { title:  @movie_names[4], plot: @plot5 },
-  { title:  @movie_names[5], plot: @plot1 },
-  { title:  @movie_names[6], plot: @plot2 },
-  { title:  @movie_names[7], plot: @plot3 },
-  { title:  @movie_names[8], plot: @plot4 },
-  { title:  @movie_names[9], plot: @plot5 },
-  { title:  @movie_names[10], plot: @plot1 },
-  { title:  @movie_names[11], plot: @plot2 },
-  { title:  @movie_names[12], plot: @plot3 },
-  { title:  @movie_names[13], plot: @plot4 },
-  { title:  @movie_names[14], plot: @plot5 },
-  { title:  @movie_names[15], plot: @plot1 },
-  { title:  @movie_names[16], plot: @plot2 },
-  { title:  @movie_names[17], plot: @plot3 },
-  { title:  @movie_names[18], plot: @plot4 },
-  { title:  @movie_names[19], plot: @plot5 },
-  { title:  @movie_names[20], plot: @plot1 },
-  { title:  @movie_names[21], plot: @plot2 },
-  { title:  @movie_names[22], plot: @plot3 },
-  { title:  @movie_names[23], plot: @plot4 },
-  { title:  @movie_names[24], plot: @plot5 },
-  { title:  @movie_names[25], plot: @plot1 },
-  { title:  @movie_names[26], plot: @plot2 },
-  { title:  @movie_names[27], plot: @plot3 },
-  { title:  @movie_names[28], plot: @plot4 },
-  { title:  @movie_names[29], plot: @plot5 },
-  { title:  @movie_names[30], plot: @plot1 },
-  { title:  @movie_names[31], plot: @plot2 },
-  { title:  @movie_names[32], plot: @plot3 },
-  { title:  @movie_names[33], plot: @plot4 },
-  { title:  @movie_names[34], plot: @plot5 },
-  { title:  @movie_names[35], plot: @plot1 },
-  { title:  @movie_names[36], plot: @plot2 },
-  { title:  @movie_names[37], plot: @plot3 },
-  { title:  @movie_names[38], plot: @plot4 },
+(0..10000).each do |i|
+	u=User.new
+  u.name="User"+i.to_s
+  u.email="User"+i.to_s+"@email.com"
+  u.password="aaaaaa"
+  u.save
+end
 
-  ])
+@rating_values = [1,2,3,4,5,6,7,8,9,10]
+@comments = ["Terrible Movie...", "Bad Movie", "Not very good", "Not a good movie",
+            "Could be better", "Decent Movie", "Not bad", "Good Movie", "Great Movie!",
+            "Excellent Movie!!!"]
 
-  users = User.create([{ name: "Andrew	Mclaughlin", email: "email@email.com", password: "aaaaaa"},
-    { name: "Valerie	Powell", email: "a@a.com", password: "aaaaaa"},
-    { name: "Dana	Lamb", email: "b@b.com", password: "aaaaaa"},
-    { name: "Chris Curry", email: "c@c.com", password: "aaaaaa"},
-    { name: "Tabitha Brady", email: "d@d.com", password: "aaaaaa"},
-    { name: "Faye	Freeman", email: "e@e.com", password: "aaaaaa"},
-    { name: "Al	Franklin", email: "f@f.com", password: "aaaaaa"},
-    { name: "Everett	Copeland", email: "g@g.com", password: "aaaaaa"},
-    { name: "Rhonda	Goodman", email: "h@h.com", password: "aaaaaa"},
-    { name: "Miriam	Norris", email: "i@i.com", password: "aaaaaa"},
-    { name: "Ignacio Bowen", email: "j@j.com", password: "aaaaaa"},
-    { name: "Theodore	Fernandez", email: "k@k.com", password: "aaaaaa"},
-    { name: "Gary	Vargas", email: "l@l.com", password: "aaaaaa"},
-    { name: "Natasha Townsend", email: "m@m.com", password: "aaaaaa"},
-    { name: "Annette Pratt", email: "n@n.com", password: "aaaaaa"},
-    { name: "Byron Graham", email: "o@o.com", password: "aaaaaa"},
-    { name: "Morris	Hunt", email: "p@p.com", password: "aaaaaa"},
-    { name: "Valerie Phillips", email: "q@q.com", password: "aaaaaa"},
-    { name: "Jason Little", email: "r@r.com", password: "aaaaaa"},
-    { name: "Paulette	Cruz", email: "s@s.com", password: "aaaaaa"},
-    { name: "Jeanne	Carson", email: "t@t.com", password: "aaaaaa"},
-])
-
-@r1=[10, 'Excellent Movie!']
-@r2=[8, 'Very Good movie']
-@r3=[6, 'Decent movie']
-@r4=[4, 'Bad movie']
-@r5=[1, 'Terrible movie...']
-
-ratings = Rating.create([{rating_value: @r1[0], comment: @r1[1], user_id: 1, movie_id: 1},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 1},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 3, movie_id: 1},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 1},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 5, movie_id: 1},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 6, movie_id: 1},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 1},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 1},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 9, movie_id: 1},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 1},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 2},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 2},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 2},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 14, movie_id: 2},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 15, movie_id: 2},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 16, movie_id: 2},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 2},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 18, movie_id: 2},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 19, movie_id: 2},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 2},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 3},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 6, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 3},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 3},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 9, movie_id: 3},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 3},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 3},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 14, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 16, movie_id: 3},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 18, movie_id: 3},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 19, movie_id: 3},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 3},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 4},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 4},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 4},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 4},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 5, movie_id: 4},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 4},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 4},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 4},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 4},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 4},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 5},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 14, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 16, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 5},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 5},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 5},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 5},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 6},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 7},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 8},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 9},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 5, movie_id: 10},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 11},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 12},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 13},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 14},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 15},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 6},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 7},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 8},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 14, movie_id: 9},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 10},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 16, movie_id: 11},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 12},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 13},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 14},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 15},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 27},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 28},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 29},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 30},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 6, movie_id: 31},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 32},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 33},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 35},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 27},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 28},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 14, movie_id: 29},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 30},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 16, movie_id: 31},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 32},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 18, movie_id: 33},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 35},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 16},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 17},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 15, movie_id: 20},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 16, movie_id: 21},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 17, movie_id: 22},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 18, movie_id: 23},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 19, movie_id: 24},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 25},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 16},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 17},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 20},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 6, movie_id: 21},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 22},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 23},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 9, movie_id: 24},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 25},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 37},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 37},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 37},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 14, movie_id: 37},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 37},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 37},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 17, movie_id: 37},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 37},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 37},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 37},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 36},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 36},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 36},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 36},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 5, movie_id: 36},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 36},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 36},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 36},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 36},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 10, movie_id: 36},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 2, movie_id: 26},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 26},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 4, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 5, movie_id: 26},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 7, movie_id: 26},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 26},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 10, movie_id: 26},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 14, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 26},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 26},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 17, movie_id: 26},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 26},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 26},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 26},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 32},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 32},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 32},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 14, movie_id: 32},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 32},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 32},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 32},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 32},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 32},
-
-  {rating_value: @r4[0], comment: @r4[1], user_id: 11, movie_id: 30},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 30},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 13, movie_id: 30},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 14, movie_id: 30},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 30},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 17, movie_id: 30},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 18, movie_id: 30},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 19, movie_id: 30},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 30},
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 2, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 3, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 4, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 34},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 7, movie_id: 34},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 10, movie_id: 34},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 14, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 34},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 34},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 17, movie_id: 34},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 18, movie_id: 34},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 34},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 34},
-
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 18},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 2, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 3, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 4, movie_id: 18},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 18},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 18},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 7, movie_id: 18},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 18},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 10, movie_id: 18},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 18},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 14, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 18},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 16, movie_id: 18},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 17, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 18, movie_id: 18},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 18},
-  {rating_value: @r5[0], comment: @r5[1], user_id: 20, movie_id: 18},
-
-
-  {rating_value: @r2[0], comment: @r2[1], user_id: 1, movie_id: 19},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 2, movie_id: 19},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 3, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 4, movie_id: 19},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 5, movie_id: 19},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 6, movie_id: 19},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 7, movie_id: 19},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 8, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 9, movie_id: 19},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 10, movie_id: 19},
-
-  {rating_value: @r1[0], comment: @r1[1], user_id: 11, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 12, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 13, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 14, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 15, movie_id: 19},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 16, movie_id: 19},
-  {rating_value: @r3[0], comment: @r3[1], user_id: 17, movie_id: 19},
-  {rating_value: @r1[0], comment: @r1[1], user_id: 18, movie_id: 19},
-  {rating_value: @r2[0], comment: @r2[1], user_id: 19, movie_id: 19},
-  {rating_value: @r4[0], comment: @r4[1], user_id: 20, movie_id: 19},
-])
+(0..42000).each do |i|
+  (0..10000).each do |j|
+  	r=Rating.new
+    @rate=Random.new.rand(1..10)
+    r.rating_value=@rating_values[@rate]
+    r.comment = @comments[@rate]
+    r.movie_id=i
+    r.user_id=j
+    r.save
+  end
+end

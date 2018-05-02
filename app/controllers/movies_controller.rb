@@ -4,14 +4,6 @@ class MoviesController < ApplicationController
   def index
     @movie_list=Movie.all
 
-    @movie_list.each do |m|
-      @ratings = Rating.where(movie_id: m.id)
-      if @ratings.average(:rating_value) and m.avg_rating==0.0
-        m.avg_rating=@ratings.average(:rating_value).round(1)
-        m.save
-      end
-    end
-
     if params[:search]
       @movie_list = Movie.where('title ILIKE ?', "%#{params[:search]}%")
     else
@@ -58,6 +50,9 @@ class MoviesController < ApplicationController
 
     if @rating.save
       flash[:success] = "Rating Saved"
+      @ratings = Rating.where(movie_id: @movie.id)
+      @movie.avg_rating=@ratings.average(:rating_value).round(1)
+      @movie.save
       redirect_to @movie
     else
       flash[:danger] = "Unable to save rating"
