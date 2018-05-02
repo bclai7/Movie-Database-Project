@@ -22,7 +22,7 @@ csv.each do |row|
     m.release_date = row['release_date']
   end
   if row['poster_path']
-    m.poster_file_name = "http://image.tmdb.org/t/p/w185" + row['poster_path']
+    m.poster = File.open("http://image.tmdb.org/t/p/w185" + row['poster_path'])
   end
   m.save
 end
