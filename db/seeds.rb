@@ -11,6 +11,7 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'movies.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 csv.each do |row|
+
   m = Movie.new
   if row['original_title']
     m.title = row['original_title']
@@ -20,9 +21,6 @@ csv.each do |row|
   end
   if row['release_date']
     m.release_date = row['release_date']
-  end
-  if row['poster_path']
-    m.poster = File.open("http://image.tmdb.org/t/p/w185" + row['poster_path'])
   end
   m.save
 end
