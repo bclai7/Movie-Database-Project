@@ -4,6 +4,11 @@
     <%= link_to "Go Back", root_path, class: "pageLink" %>
   <% else %>
     <h5>Found results for "<%= params[:search] %>".</h5>
+    <% if params[:search] %>
+      <% @movie_list = Movie.where('title ILIKE ?', "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 25) %>
+    <% else %>
+      <% @movie_list = Movie.all %>
+    <% end %>
     <% @movie_list.each do |m| %>
       <div class="movieResult">
         <!-- <%= image_tag m.poster.url(:thumb), class: "resultPoster" %> -->
@@ -18,6 +23,7 @@
         </div>
       </div>
     <% end %>
+    <center><%= will_paginate @movie_list, class: "paginate" %></center>
     <%= link_to "Go Back", root_path, class: "pageLink" %>
   <% end %>
 </div>
